@@ -22,3 +22,12 @@ var d2 = new Dialog({}).show();
 - Bootstrap 4
 - Font Awesome
 
+# Examples
+
+```
+var _c = new ColorDialog({ 
+    callback: function(color){
+        console.log(color);
+    }
+});
+```
