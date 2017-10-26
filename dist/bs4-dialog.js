@@ -11,6 +11,7 @@ Dependencies: lodash, fontawesome and jquery.
  * @class Dialog
  */
 function Dialog(options) {
+    var _Dialog = this;
     var id = _.uniqueId('dialog_');
     var modalSizes = {
         sm: "modal-sm",
@@ -24,17 +25,23 @@ function Dialog(options) {
         onClose: function() {},
         content: "",
         successLabel: "Save changes",
+        successButton: true,
         closeLabel: "Close",
+        closeButton: false,
     };
-    this.options = _.assign(defaults, options);
-    var _dialog = this;
+
+    this.options = _.assign(this.options, defaults);
+    this.options = _.assign(this.options, options);
+
     this.addClass = function(className) {
         $(this.html).addClass(className);
     };
+
     this.setSize = function(size) {
-        var size = modalSizes[size] || defaults.modalSize;
+        var size = modalSizes[size] || defaults.size;
         $(this.html).find(".modal-dialog").removeClass("modal-sm modal-lg").addClass(size);
     };
+
     this.setContent = function(content) {
         $(this.html).find(".modal-body").html("").append(content);
     };
@@ -42,13 +49,13 @@ function Dialog(options) {
     this.setTitle = function(text) {
         $(this.html).find(".modal-title").text(text);
     };
+
     this.render = function() {
-        this.html = $("<div>").addClass("modal").attr("id", id).append(
-            $("<div>").addClass("modal-dialog").addClass(this.options.size).attr("role", "document").append(
+        _Dialog.html = $("<div>").addClass("modal").attr("id", id).append(
+            $("<div>").addClass("modal-dialog").addClass(_Dialog.options.size).attr("role", "document").append(
                 $("<div>").addClass("modal-content").append(
                     $("<div>").addClass("modal-header").append(
-                        $("<h5>").addClass("modal-title").text(this.options.title)
-                    ).append(
+                        $("<h5>").addClass("modal-title").text(_Dialog.options.title),
                         $("<button>").addClass("close").attr({
                             "type": "button",
                             "data-dismiss": "modal",
@@ -56,44 +63,52 @@ function Dialog(options) {
                         }).append(
                             $("<span>").addClass("fa fa-fw fa-close").attr("aria-hidden", "true")
                         )
-                    )
-                ).append(
-                    $("<div>").addClass("modal-body").append(this.options.content)
-                ).append(
-                    $("<div>").addClass("modal-footer").append(
-                        $("<button>").addClass("btn btn-primary").text(this.options.successLabel)
-                    ).append(
-                        $("<button>").addClass("btn btn-secondary").text(this.options.closeLabel)
-                    )
+                    ),
+                    $("<div>").addClass("modal-body").append(_Dialog.options.content),
+                    $("<div>").addClass("modal-footer")
                 )
             )
         );
-        $(this.html).find(".btn-primary").click(function() {
-            _dialog.close();
-            _dialog.options.onSuccess(_dialog);
+        if (_Dialog.options.closeButton) {
+            $(_Dialog.html).find(".modal-footer").append(
+                $("<button>").addClass("btn btn-secondary").text(_Dialog.options.closeLabel)
+            );
+        }
+        if (_Dialog.options.successButton) {
+            $(_Dialog.html).find(".modal-footer").append(
+                $("<button>").addClass("btn btn-primary").text(_Dialog.options.successLabel),
+            );
+        }
+        $(_Dialog.html).find(".modal-footer > .btn-primary").click(function() {
+            _Dialog.close();
+            _Dialog.options.onSuccess(_Dialog);
             console.log("Dialog Success");
         });
-        $(this.html).find(".btn-secondary").click(function() {
-            _dialog.close();
+        $(_Dialog.html).find(".modal-footer > .btn-secondary").click(function() {
+            _Dialog.close();
         });
-        $("body").append(this.html);
+        $("body").append(_Dialog.html);
     };
-    this.show = function() {
-        this.render();
-        $(this.html).modal('show');
-        _dialog.options.onShow(_dialog);
+
+    _Dialog.show = function() {
+        $(_Dialog.html).modal('show');
+        _Dialog.options.onShow(_Dialog);
         console.log("Dialog Show");
     };
-    this.close = function() {
-        $(this.html).modal('hide');
-        _dialog.options.onClose(_dialog);
+
+    _Dialog.close = function() {
+        $(_Dialog.html).modal('hide');
+        _Dialog.options.onClose(_Dialog);
         console.log("Dialog Close");
     };
-    return this;
+
+    _Dialog.render();
+    return _Dialog;
 }
 
-function inputDialog(options) {
+function InputDialog(options) {
     Dialog.call(this);
+    var _InputDialog = this;
     var defaults = {
         callback: function() {},
         title: "Input",
@@ -111,7 +126,62 @@ function inputDialog(options) {
     };
     this.options = _.assign(this.options, defaults); // Apply Input defaults to Dialog
     this.options = _.assign(this.options, options); // Apply Input instance config 
+    this.render();
     this.show();
     return this;
 }
-inputDialog.prototype = _.create(Dialog.prototype, { 'constructor': inputDialog });
+InputDialog.prototype = _.create(Dialog.prototype, { 'constructor': InputDialog });
+
+function ColorDialog(options) {
+    Dialog.call(this);
+    var _ColorDialog = this;
+    var _content = $("<div>").append(
+        $("<div>").addClass("btn-toolbar mb-3 justify-content-center").attr({ "role": "toolbar", "aria-label": "Cores para seleção" }).append(
+            $("<div>").addClass("btn-group").attr({ "role": "group", "aria-label": "Cores para seleção" }).append(
+                $("<button>").addClass("px-3 btn btn-primary").attr({ type: "button", 'data-color': "btn-primary" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
+                $("<button>").addClass("px-3 btn btn-secondary").attr({ type: "button", 'data-color': "btn-secondary" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
+                $("<button>").addClass("px-3 btn btn-success").attr({ type: "button", 'data-color': "btn-success" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
+            )
+        ),
+        $("<div>").addClass("btn-toolbar mb-3 justify-content-center").attr({ "role": "toolbar", "aria-label": "Cores para seleção" }).append(
+            $("<div>").addClass("btn-group").attr({ "role": "group", "aria-label": "Cores para seleção" }).append(
+                $("<button>").addClass("px-3 btn btn-danger").attr({ type: "button", 'data-color': "btn-danger" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
+                $("<button>").addClass("px-3 btn btn-warning").attr({ type: "button", 'data-color': "btn-warning" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
+                $("<button>").addClass("px-3 btn btn-info").attr({ type: "button", 'data-color': "btn-info" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
+            )
+        ),
+        $("<div>").addClass("btn-toolbar mb-3 justify-content-center").attr({ "role": "toolbar", "aria-label": "Cores para seleção" }).append(
+            $("<div>").addClass("btn-group").attr({ "role": "group", "aria-label": "Cores para seleção" }).append(
+                $("<button>").addClass("px-3 btn btn-light").attr({ type: "button", 'data-color': "btn-light" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
+                $("<button>").addClass("px-3 btn btn-dark").attr({ type: "button", 'data-color': "btn-dark" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
+                $("<button>").addClass("px-3 btn btn-white").attr({ type: "button", 'data-color': "btn-white" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
+            )
+        )
+    );
+    var defaults = {
+        callback: function() {},
+        title: "Color Dialog",
+        onSuccess: function(dialogRef) {
+            var r = $(dialogRef.html).find(".modal-body").find(".selected").attr("data-color");
+            options.callback(r);
+        },
+        onShow: function(dialogRef) {},
+        successButton: false,
+        closeButton: true,
+        closeLabel: "Fechar",
+        content: _content
+    };
+    _ColorDialog.options = _.assign(_ColorDialog.options, defaults); // Apply defaults to options
+    _ColorDialog.options = _.assign(_ColorDialog.options, options); // Apply Instance options to options
+    _ColorDialog.clickAction = function(ele) {
+        var color = $(ele).attr("data-color");
+        _ColorDialog.options.callback(color);
+        _ColorDialog.close();
+    };
+
+    _ColorDialog.render();
+    _ColorDialog.setSize("sm");
+    _ColorDialog.show();
+    return _ColorDialog;
+}
+ColorDialog.prototype = _.create(Dialog.prototype, { 'constructor': ColorDialog });
