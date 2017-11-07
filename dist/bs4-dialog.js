@@ -184,3 +184,32 @@ function ColorDialog(options) {
     return _ColorDialog;
 }
 ColorDialog.prototype = _.create(Dialog.prototype, { 'constructor': ColorDialog });
+
+function ConfirmDialog(options) {
+    Dialog.call(this);
+    var _ConfirmDialog = this;
+    var defaults = {
+        callback: function() {},
+        title: "Confirmation Dialog",
+        onSuccess: function(dialogRef) {
+            options.callback(true);
+        },
+        onClose: function(dialogRef) {
+            options.callback(false);
+        },
+        successButton: true,
+        successLabel: "Yes",
+        closeButton: true,
+        closeLabel: "No",
+        text: "Confirm?",
+        content: $("<h2>").text(options.text)
+    };
+    _ConfirmDialog.options = _.assign(_ConfirmDialog.options, defaults); // Apply defaults to options
+    _ConfirmDialog.options = _.assign(_ConfirmDialog.options, options); // Apply Instance options to options
+
+    _ConfirmDialog.render();
+    _ConfirmDialog.setSize("sm");
+    _ConfirmDialog.show();
+    return _ConfirmDialog;
+}
+ConfirmDialog.prototype = _.create(Dialog.prototype, { 'constructor': ConfirmDialog });
