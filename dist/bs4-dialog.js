@@ -23,6 +23,7 @@ function Dialog(options) {
         onShow: function() {},
         onSuccess: function() {},
         onClose: function() {},
+        onHide: function() {},
         content: "",
         successLabel: "Save changes",
         successButton: true,
@@ -80,7 +81,7 @@ function Dialog(options) {
             );
         }
         $(_Dialog.html).find(".modal-footer > .btn-primary").click(function() {
-            _Dialog.close();
+            _Dialog.hide();
             _Dialog.options.onSuccess(_Dialog);
             console.log("Dialog Success");
         });
@@ -93,13 +94,15 @@ function Dialog(options) {
     _Dialog.show = function() {
         $(_Dialog.html).modal('show');
         _Dialog.options.onShow(_Dialog);
-        console.log("Dialog Show");
     };
 
     _Dialog.close = function() {
         $(_Dialog.html).modal('hide');
         _Dialog.options.onClose(_Dialog);
-        console.log("Dialog Close");
+    };
+    _Dialog.hide = function() {
+        $(_Dialog.html).modal('hide');
+        _Dialog.options.onHide(_Dialog);
     };
 
     _Dialog.render();
