@@ -6,14 +6,6 @@ Creates Bootstrap 4 modal dialogs in js.
 
 clone this repo
 include `dist/bs4-dialog.js` in your html.
-Create dialogs: 
-
-```
-var d = new inputDialog({});
-
-var d2 = new Dialog({}).show();
-```
-
 
 # Dependencies
 
@@ -27,7 +19,21 @@ var d2 = new Dialog({}).show();
 ```
 var _c = new ColorDialog({ 
     callback: function(color){
-        console.log(color);
+        console.log("Result: ",color);
     }
 });
+// Result: "bg_danger"
+// Result: "bg_success"
+
+..
+
+var _d = new ConfirmDialog({ 
+    text: "Confirmation", 
+    callback: function(val){ 
+        console.log("Result: ",val); 
+    } 
+});
+
+// Result: true
+// Result: false
 ```
