@@ -22,8 +22,8 @@ var _c = new ColorDialog({
         console.log("Result: ",color);
     }
 });
-// Result: "bg_danger"
-// Result: "bg_success"
+// Result: "danger"
+// Result: "success"
 
 ..
 

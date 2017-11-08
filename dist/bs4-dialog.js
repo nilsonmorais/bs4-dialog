@@ -141,23 +141,23 @@ function ColorDialog(options) {
     var _content = $("<div>").append(
         $("<div>").addClass("btn-toolbar mb-3 justify-content-center").attr({ "role": "toolbar", "aria-label": "Cores para seleção" }).append(
             $("<div>").addClass("btn-group").attr({ "role": "group", "aria-label": "Cores para seleção" }).append(
-                $("<button>").addClass("px-3 btn btn-primary").attr({ type: "button", 'data-color': "bg-primary" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
-                $("<button>").addClass("px-3 btn btn-secondary").attr({ type: "button", 'data-color': "bg-secondary" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
-                $("<button>").addClass("px-3 btn btn-success").attr({ type: "button", 'data-color': "bg-success" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
+                $("<button>").addClass("px-3 btn btn-primary").attr({ type: "button", 'data-color': "primary" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
+                $("<button>").addClass("px-3 btn btn-secondary").attr({ type: "button", 'data-color': "secondary" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
+                $("<button>").addClass("px-3 btn btn-success").attr({ type: "button", 'data-color': "success" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
             )
         ),
         $("<div>").addClass("btn-toolbar mb-3 justify-content-center").attr({ "role": "toolbar", "aria-label": "Cores para seleção" }).append(
             $("<div>").addClass("btn-group").attr({ "role": "group", "aria-label": "Cores para seleção" }).append(
-                $("<button>").addClass("px-3 btn btn-danger").attr({ type: "button", 'data-color': "bg-danger" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
-                $("<button>").addClass("px-3 btn btn-warning").attr({ type: "button", 'data-color': "bg-warning" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
-                $("<button>").addClass("px-3 btn btn-info").attr({ type: "button", 'data-color': "bg-info" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
+                $("<button>").addClass("px-3 btn btn-danger").attr({ type: "button", 'data-color': "danger" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
+                $("<button>").addClass("px-3 btn btn-warning").attr({ type: "button", 'data-color': "warning" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
+                $("<button>").addClass("px-3 btn btn-info").attr({ type: "button", 'data-color': "info" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
             )
         ),
         $("<div>").addClass("btn-toolbar mb-3 justify-content-center").attr({ "role": "toolbar", "aria-label": "Cores para seleção" }).append(
             $("<div>").addClass("btn-group").attr({ "role": "group", "aria-label": "Cores para seleção" }).append(
-                $("<button>").addClass("px-3 btn btn-light").attr({ type: "button", 'data-color': "bg-light" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
-                $("<button>").addClass("px-3 btn btn-dark").attr({ type: "button", 'data-color': "bg-dark" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
-                $("<button>").addClass("px-3 btn btn-white").attr({ type: "button", 'data-color': "bg-white" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
+                $("<button>").addClass("px-3 btn btn-light").attr({ type: "button", 'data-color': "light" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
+                $("<button>").addClass("px-3 btn btn-dark").attr({ type: "button", 'data-color': "dark" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
+                $("<button>").addClass("px-3 btn btn-white").attr({ type: "button", 'data-color': "white" }).html("&nbsp;").click(function() { _ColorDialog.clickAction(this); }),
             )
         )
     );
