@@ -16,20 +16,23 @@ include `dist/bs4-dialog.js` in your html.
 
 # Examples
 
+## Color Dialog
 ```
 var _c = new ColorDialog({ 
-    callback: function(color){
+    callback: color => {
         console.log("Result: ",color);
     }
 });
 // Result: "danger"
 // Result: "success"
+```
 
-..
+## Confirmation Dialog
 
+```
 var _d = new ConfirmDialog({ 
     text: "Confirmation", 
-    callback: function(val){ 
+    callback: val => { 
         console.log("Result: ",val); 
     } 
 });
@@ -37,3 +40,12 @@ var _d = new ConfirmDialog({
 // Result: true
 // Result: false
 ```
+
+## FontAwesome Dialog
+
+```
+var i = new iconDialog({ callback: icon => { console.log("Selected: ", icon) } });
+i.show();
+>> Selected: fa-rebel
+```
+

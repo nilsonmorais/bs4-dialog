@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <div class="container">
+        <div class="card mt-2" id="dialog1">
+            <div class="card-header">Confirmation</div>
+            <div class="card-body">
+                <button class="btn btn-primary" type="button">Open Dialog</button>
+            </div>
+            <div class="card-body bg-light">
+                <pre><code>
+var d = new ConfirmDialog({ 
+    text: "Confirmation", 
+    callback: responseValue => { 
+        console.log("Result: "+ responseValue); 
+    } 
+});
+                </code></pre>
+            </div>
+            <div class="card-body"><code class="response"></code></div>
+        </div>
+        <div class="card mt-2" id="dialog2">
+            <div class="card-header">Input</div>
+            <div class="card-body">
+                <button class="btn btn-primary" type="button">Open Dialog</button>
+            </div>
+            <div class="card-body bg-light">
+                <pre><code>
+var d = new InputDialog({ 
+    callback: responseValue => { 
+        console.log("Result: "+ responseValue); 
+    } 
+});
+                </code></pre>
+            </div>
+            <div class="card-body"><code class="response"></code></div>
+        </div>
+        <div class="card mt-2" id="dialog3">
+            <div class="card-header">FontAwesome</div>
+            <div class="card-body">
+                <button class="btn btn-primary" type="button">Open Dialog</button>
+            </div>
+            <div class="card-body bg-light">
+                <pre><code>
+var d = new IconDialog({ 
+    callback: responseValue => { 
+        console.log("Result: "+ responseValue); 
+    } 
+});
+d.show();
+                </code></pre>
+            </div>
+            <div class="card-body"><code class="response"></code></div>
+        </div>
+        <div class="card mt-2" id="dialog4">
+            <div class="card-header">BS4 bg Dialog</div>
+            <div class="card-body">
+                <button class="btn btn-primary" type="button">Open Dialog</button>
+            </div>
+            <div class="card-body bg-light">
+                <pre><code>
+var d = new ColorDialog({ 
+    callback: responseValue => { 
+        console.log("Result: "+ responseValue); 
+    } 
+});
+d.show();
+                </code></pre>
+            </div>
+            <div class="card-body"><code class="response"></code></div>
+        </div>
+        <div class="card mt-2" id="dialog5">
+            <div class="card-header">Color Picker Dialog</div>
+            <div class="card-body">
+                <button class="btn btn-primary" type="button">Open Dialog</button>
+            </div>
+            <div class="card-body bg-light">
+                <pre><code>
+var d = new ColorPickerDialog({ 
+    callback: responseValue => { 
+        console.log("Result: "+ responseValue); 
+    } 
+});
+d.show();
+                </code></pre>
+            </div>
+            <div class="card-body"><code class="response"></code></div>
+        </div>
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+    <script src="https://raw.githubusercontent.com/nilsonmorais/bs4-dialog/master/dist/js/bs4-dialog.js"></script>
+    <!-- <script src="../dist/js/bs4-dialog.js"></script> -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            $("#dialog1 button").click(() => {
+                var d = new ConfirmDialog({ 
+                    text: "Confirmation", 
+                    callback: responseValue => { 
+                        $("#dialog1 .response").text("Result: "+ responseValue); 
+                    } 
+                });
+            });
+            $("#dialog2 button").click(() => {
+                var d = new InputDialog({ 
+                    callback: responseValue => { 
+                        $("#dialog2 .response").text("Result: "+ responseValue); 
+                    } 
+                });
+            });
+            $("#dialog3 button").click(() => {
+                var d = new IconDialog({ 
+                    callback: responseValue => { 
+                        $("#dialog3 .response").text("Result: "+ responseValue); 
+                    } 
+                });
+                d.show();
+            });
+            $("#dialog4 button").click(() => {
+                var d = new ColorDialog({ 
+                    callback: responseValue => { 
+                        $("#dialog4 .response").text("Result: "+ responseValue); 
+                    } 
+                });
+                d.show();
+            });
+            $("#dialog5 button").click(() => {
+                var d = new ColorPickerDialog({ 
+                    callback: responseValue => { 
+                        $("#dialog5 .response").text("Result: "+ responseValue); 
+                    } 
+                });
+                d.show();
+            });
+        });
+    </script>
+  </div></body>
+</html>

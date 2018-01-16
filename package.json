@@ -1,16 +1,20 @@
 {
     "name": "@nilsonmorais/bs4-dialog",
-    "version": "0.0.54",
+    "version": "1.0.14",
     "description": "",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "pub": "grunt bump && npm publish"
+        "pub": "grunt && grunt bump && npm publish"
     },
     "author": "Nilson Morais",
     "license": "MIT",
     "devDependencies": {
+        "babel-core": "^6.26.0",
+        "babel-preset-env": "^1.6.1",
         "grunt": "^1.0.1",
-        "grunt-bump": "^0.8.0"
+        "grunt-babel": "^7.0.0",
+        "grunt-bump": "^0.8.0",
+        "grunt-contrib-copy": "^1.0.0"
     }
 }
