@@ -157,17 +157,44 @@ var ColorDialog = function (_Dialog2) {
     function ColorDialog(options) {
         _classCallCheck(this, ColorDialog);
 
-        var _options = {};
+        var _options = {
+            callback: function callback() {}
+        };
         _.merge(_options, options);
 
-        // let color = $(ele).attr("data-color");
-        // this.options.callback(color);
         var _this3 = _possibleConstructorReturn(this, (ColorDialog.__proto__ || Object.getPrototypeOf(ColorDialog)).call(this, _options));
 
+        var _html = $("<div>").append($("<div>").addClass("btn-toolbar mb-3 justify-content-center").attr({ "role": "toolbar", "aria-label": "Cores para seleção" }).append($("<div>").addClass("btn-group").attr({ "role": "group", "aria-label": "Cores para seleção" }).append($("<button>").addClass("px-3 btn btn-primary").attr({ type: "button", 'data-color': "bg-primary" }).html("&nbsp;").click(function (e) {
+            _this3.clickAction(e);
+        }), $("<button>").addClass("px-3 btn btn-secondary").attr({ type: "button", 'data-color': "bg-secondary" }).html("&nbsp;").click(function (e) {
+            _this3.clickAction(e);
+        }), $("<button>").addClass("px-3 btn btn-success").attr({ type: "button", 'data-color': "bg-success" }).html("&nbsp;").click(function (e) {
+            _this3.clickAction(e);
+        }))), $("<div>").addClass("btn-toolbar mb-3 justify-content-center").attr({ "role": "toolbar", "aria-label": "Cores para seleção" }).append($("<div>").addClass("btn-group").attr({ "role": "group", "aria-label": "Cores para seleção" }).append($("<button>").addClass("px-3 btn btn-danger").attr({ type: "button", 'data-color': "bg-danger" }).html("&nbsp;").click(function (e) {
+            _this3.clickAction(e);
+        }), $("<button>").addClass("px-3 btn btn-warning").attr({ type: "button", 'data-color': "bg-warning" }).html("&nbsp;").click(function (e) {
+            _this3.clickAction(e);
+        }), $("<button>").addClass("px-3 btn btn-info").attr({ type: "button", 'data-color': "bg-info" }).html("&nbsp;").click(function (e) {
+            _this3.clickAction(e);
+        }))), $("<div>").addClass("btn-toolbar mb-3 justify-content-center").attr({ "role": "toolbar", "aria-label": "Cores para seleção" }).append($("<div>").addClass("btn-group").attr({ "role": "group", "aria-label": "Cores para seleção" }).append($("<button>").addClass("px-3 btn btn-light").attr({ type: "button", 'data-color': "bg-light" }).html("&nbsp;").click(function (e) {
+            _this3.clickAction(e);
+        }), $("<button>").addClass("px-3 btn btn-dark").attr({ type: "button", 'data-color': "bg-dark" }).html("&nbsp;").click(function (e) {
+            _this3.clickAction(e);
+        }), $("<button>").addClass("px-3 btn btn-white").attr({ type: "button", 'data-color': "bg-white" }).html("&nbsp;").click(function (e) {
+            _this3.clickAction(e);
+        }))));
+        _this3.setContent(_html);
         _this3.setSize("sm");
-        // this.close();
         return _this3;
     }
+
+    _createClass(ColorDialog, [{
+        key: 'clickAction',
+        value: function clickAction(_e) {
+            this.options.callback($(_e.target).attr("data-color"));
+            this.close();
+        }
+    }]);
 
     return ColorDialog;
 }(Dialog);
@@ -206,11 +233,59 @@ var ConfirmDialog = function (_Dialog3) {
     return ConfirmDialog;
 }(Dialog);
 
-var iconDialog = function (_Dialog4) {
-    _inherits(iconDialog, _Dialog4);
+var ColorPickerDialog = function (_Dialog4) {
+    _inherits(ColorPickerDialog, _Dialog4);
 
-    function iconDialog(options) {
-        _classCallCheck(this, iconDialog);
+    function ColorPickerDialog(options) {
+        _classCallCheck(this, ColorPickerDialog);
+
+        var _options = {
+            callback: function callback() {},
+            title: "Color Picker Dialog",
+            onSuccess: function onSuccess(dialogRef) {
+                var r = _this5.colorValue;
+                _this5.options.callback(r);
+            },
+            classNameDefault: "p-0 mr-2 border-0"
+        };
+        _.merge(_options, options);
+
+        var _this5 = _possibleConstructorReturn(this, (ColorPickerDialog.__proto__ || Object.getPrototypeOf(ColorPickerDialog)).call(this, _options));
+
+        _this5.colorInput = $("<input>").attr("type", "color").change(function (event) {
+            _this5.colorValue = event.target.value;
+        }).addClass(_this5.options.classNameDefault).css({
+            width: "80px",
+            height: "30px",
+            background: "transparent"
+        });
+        _this5.spanElement = $("<span>").text(_this5.colorValue).addClass("badge badge-dark").css("height", "30px");
+        var _html = $("<h4>").addClass("d-flex").append(_this5.colorInput, _this5.spanElement);
+
+        _this5.setSize("sm");
+        _this5.setContent(_html);
+        return _this5;
+    }
+
+    _createClass(ColorPickerDialog, [{
+        key: 'colorValue',
+        get: function get() {
+            return this.colorInput.val();
+        },
+        set: function set(_value) {
+            this.colorInput.val(_value);
+            this.spanElement.text(_value);
+        }
+    }]);
+
+    return ColorPickerDialog;
+}(Dialog);
+
+var IconDialog = function (_Dialog5) {
+    _inherits(IconDialog, _Dialog5);
+
+    function IconDialog(options) {
+        _classCallCheck(this, IconDialog);
 
         var _options = {
             id: _.uniqueId("iconpicker_"),
@@ -220,25 +295,25 @@ var iconDialog = function (_Dialog4) {
             callback: function callback() {},
             onSuccess: function onSuccess(dialogRef) {
                 var r = $(dialogRef.html).find(".modal-body").find("input").attr('data-value');
-                _this5.options.callback(r);
+                _this6.options.callback(r);
             },
-            title: "Selecione ícone"
+            title: "Choose icon"
         };
         _.merge(_options, options);
 
-        var _this5 = _possibleConstructorReturn(this, (iconDialog.__proto__ || Object.getPrototypeOf(iconDialog)).call(this, _options));
+        var _this6 = _possibleConstructorReturn(this, (IconDialog.__proto__ || Object.getPrototypeOf(IconDialog)).call(this, _options));
 
-        _this5.setSize("sm");
-        _this5.render();
-        return _this5;
+        _this6.setSize("sm");
+        _this6.render();
+        return _this6;
     }
 
-    _createClass(iconDialog, [{
+    _createClass(IconDialog, [{
         key: 'render',
         value: function render() {
-            var _this6 = this;
+            var _this7 = this;
 
-            _get(iconDialog.prototype.__proto__ || Object.getPrototypeOf(iconDialog.prototype), 'render', this).call(this);
+            _get(IconDialog.prototype.__proto__ || Object.getPrototypeOf(IconDialog.prototype), 'render', this).call(this);
             var _html = $("<div>");
 
             this.iconElement = $("<i>").addClass(this.options.classNameDefault).addClass(this.options.value);
@@ -246,14 +321,14 @@ var iconDialog = function (_Dialog4) {
 
             _html.append($("<div>").addClass("form-group").append($("<div>").addClass("input-group").append(this.inputElement, $("<div>").addClass("input-group-append").append($("<div>").addClass("input-group-text btn btn-light").append(this.iconElement)))));
             this.inputElement.change(function (e) {
-                _this6.inputChangeEvent(e);
+                _this7.inputChangeEvent(e);
             });
 
             var iconList = $("<ul>").addClass("list-inline iconpicker").css({ 'max-height': '350px', 'overflow': 'auto' });
             this.options.validIcons.forEach(function (i) {
                 iconList.append($("<li>").addClass("list-inline-item").append($("<i>").attr("data-value", i).addClass("fa fa-fw").addClass(i).click(function (e) {
-                    _this6.setInputValue($(e.target).attr('data-value'));
-                    _this6.refreshIcon();
+                    _this7.setInputValue($(e.target).attr('data-value'));
+                    _this7.refreshIcon();
                 })));
             });
             _html.append(iconList);
@@ -293,5 +368,5 @@ var iconDialog = function (_Dialog4) {
         }
     }]);
 
-    return iconDialog;
+    return IconDialog;
 }(Dialog);
